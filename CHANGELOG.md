@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.4.0]
+- Support fill-opacity on gradient parsing from SVG. [#5812](https://github.com/fabricjs/fabric.js/pull/5812)
+- Rewrite gradient parsing from SVG to work with more transformation and combinations of attributes. [#5836](https://github.com/fabricjs/fabric.js/pull/5836)
+- Added Gradient.gradientUnits property to support percent based gradients on shapes.[#5836](https://github.com/fabricjs/fabric.js/pull/5836)
+- Changed animation logic so that onComplete gets always called with the final values of the animation.[#5813](https://github.com/fabricjs/fabric.js/pull/5813)
+
+## [3.3.0]
+- Differently support multi mouse events, fix multi touch on various browser [#5785](https://github.com/fabricjs/fabric.js/pull/5785)
+- Word boundary search update on grapheme clusters [#5788](https://github.com/fabricjs/fabric.js/pull/5788)
+- Enable deps free version [#5786](https://github.com/fabricjs/fabric.js/pull/5786)
+- Remove variables named as reserved words [#5782](https://github.com/fabricjs/fabric.js/pull/5782)
+
+## [3.2.0]
+- Fix: Better handling of upperCanvas in toCanvasElement. [#5736](https://github.com/fabricjs/fabric.js/pull/5736)
+- Add: Pass raw event information to brushes [#5687](https://github.com/fabricjs/fabric.js/pull/5687)
+- Deprecation: officially deprecated Object.transformMatrix [#5747](https://github.com/fabricjs/fabric.js/pull/5747)
+- Fix: Fix group.toSVG regression. [#5755](https://github.com/fabricjs/fabric.js/pull/5755)
+- Fix: PencilBrush regression on simple points. [#5771](https://github.com/fabricjs/fabric.js/pull/5771)
+
 ## [3.1.0]
 - Fix: unbreak IE10. [#5678](https://github.com/fabricjs/fabric.js/pull/5678)
 - Improvement: Support scientific notation with uppercase E. [#5731](https://github.com/fabricjs/fabric.js/pull/5731)

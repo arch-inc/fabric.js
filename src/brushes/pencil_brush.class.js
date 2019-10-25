@@ -37,7 +37,10 @@
      * Inovoked on mouse down
      * @param {Object} pointer
      */
-    onMouseDown: function(pointer) {
+    onMouseDown: function(pointer, options) {
+      if (!this.canvas._isMainEvent(options.e)) {
+        return;
+      }
       this._prepareForDrawing(pointer);
       // capture coordinates immediately
       // this allows to draw dots (when movement never occurs)
@@ -49,7 +52,10 @@
      * Inovoked on mouse move
      * @param {Object} pointer
      */
-    onMouseMove: function(pointer) {
+    onMouseMove: function(pointer, options) {
+      if (!this.canvas._isMainEvent(options.e)) {
+        return;
+      }
       if (this._captureDrawingPath(pointer) && this._points.length > 1) {
         if (this.needsFullRender()) {
           // redraw curve
@@ -75,9 +81,13 @@
     /**
      * Invoked on mouse up
      */
-    onMouseUp: function() {
+    onMouseUp: function(options) {
+      if (!this.canvas._isMainEvent(options.e)) {
+        return true;
+      }
       this.oldEnd = undefined;
       this._finalizeAndAddPath();
+      return false;
     },
 
     /**
@@ -110,7 +120,7 @@
      * @private
      */
     _reset: function() {
-      this._points.length = 0;
+      this._points = [];
       this._setBrushStyles();
       this._setShadow();
     },
@@ -239,6 +249,9 @@
           lastPoint = points[i];
           newPoints.push(lastPoint);
         }
+      }
+      if (newPoints.length === 1) {
+        newPoints.push(new fabric.Point(newPoints[0].x, newPoints[0].y));
       }
       return newPoints;
     },
