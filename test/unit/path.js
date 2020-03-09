@@ -27,24 +27,23 @@
     'shadow':                   null,
     'visible':                  true,
     'backgroundColor':          '',
-    'clipTo':                   null,
     'fillRule':                 'nonzero',
     'paintFirst':               'fill',
     'globalCompositeOperation': 'source-over',
     'skewX':                    0,
     'skewY':                    0,
-    'transformMatrix':          null
   };
 
   function getPathElement(path) {
-    var el = fabric.document.createElement('path');
-    el.setAttribute('d', path);
-    el.setAttribute('fill', 'red');
-    el.setAttribute('stroke', 'blue');
-    el.setAttribute('stroke-width', 1);
-    el.setAttribute('stroke-linecap', 'butt');
-    el.setAttribute('stroke-linejoin', 'miter');
-    el.setAttribute('stroke-miterlimit', 4);
+    var namespace = 'http://www.w3.org/2000/svg';
+    var el = fabric.document.createElementNS(namespace, 'path');
+    el.setAttributeNS(namespace, 'd', path);
+    el.setAttributeNS(namespace, 'fill', 'red');
+    el.setAttributeNS(namespace, 'stroke', 'blue');
+    el.setAttributeNS(namespace, 'stroke-width', 1);
+    el.setAttributeNS(namespace, 'stroke-linecap', 'butt');
+    el.setAttributeNS(namespace, 'stroke-linejoin', 'miter');
+    el.setAttributeNS(namespace, 'stroke-miterlimit', 4);
     return el;
   }
 
@@ -243,21 +242,22 @@
   QUnit.test('fromElement', function(assert) {
     var done = assert.async();
     assert.ok(typeof fabric.Path.fromElement === 'function');
-    var elPath = fabric.document.createElement('path');
+    var namespace = 'http://www.w3.org/2000/svg';
+    var elPath = fabric.document.createElementNS(namespace, 'path');
 
-    elPath.setAttribute('d', 'M 100 100 L 300 100 L 200 300 z');
-    elPath.setAttribute('fill', 'red');
-    elPath.setAttribute('opacity', '1');
-    elPath.setAttribute('stroke', 'blue');
-    elPath.setAttribute('stroke-width', '1');
-    elPath.setAttribute('stroke-dasharray', '5, 2');
-    elPath.setAttribute('stroke-linecap', 'round');
-    elPath.setAttribute('stroke-linejoin', 'bevil');
-    elPath.setAttribute('stroke-miterlimit', '5');
+    elPath.setAttributeNS(namespace, 'd', 'M 100 100 L 300 100 L 200 300 z');
+    elPath.setAttributeNS(namespace, 'fill', 'red');
+    elPath.setAttributeNS(namespace, 'opacity', '1');
+    elPath.setAttributeNS(namespace, 'stroke', 'blue');
+    elPath.setAttributeNS(namespace, 'stroke-width', '1');
+    elPath.setAttributeNS(namespace, 'stroke-dasharray', '5, 2');
+    elPath.setAttributeNS(namespace, 'stroke-linecap', 'round');
+    elPath.setAttributeNS(namespace, 'stroke-linejoin', 'bevil');
+    elPath.setAttributeNS(namespace, 'stroke-miterlimit', '5');
 
     // TODO (kangax): to support multiple transformation keywords, we need to do proper matrix multiplication
     //elPath.setAttribute('transform', 'scale(2) translate(10, -20)');
-    elPath.setAttribute('transform', 'scale(2)');
+    elPath.setAttributeNS(namespace, 'transform', 'scale(2)');
 
     fabric.Path.fromElement(elPath, function(path) {
       assert.ok(path instanceof fabric.Path);
@@ -266,14 +266,12 @@
         strokeDashArray:  [5, 2],
         strokeLineCap:    'round',
         strokeLineJoin:   'bevil',
-        strokeMiterLimit: 5,
-        transformMatrix:  [2, 0, 0, 2, 0, 0]
+        strokeMiterLimit: 5
       }));
 
       var ANGLE_DEG = 90;
-      elPath.setAttribute('transform', 'rotate(' + ANGLE_DEG + ')');
+      elPath.setAttributeNS(namespace, 'transform', 'rotate(' + ANGLE_DEG + ')');
       fabric.Path.fromElement(elPath, function(path) {
-
         assert.deepEqual(
           path.get('transformMatrix'),
           [0, 1, -1, 0, 0, 0]
@@ -286,16 +284,15 @@
   QUnit.test('numbers with leading decimal point', function(assert) {
     var done = assert.async();
     assert.ok(typeof fabric.Path.fromElement === 'function');
-    var elPath = fabric.document.createElement('path');
+    var namespace = 'http://www.w3.org/2000/svg';
+    var elPath = fabric.document.createElementNS(namespace, 'path');
 
-    elPath.setAttribute('d', 'M 100 100 L 300 100 L 200 300 z');
-    elPath.setAttribute('transform', 'scale(.2)');
+    elPath.setAttributeNS(namespace, 'd', 'M 100 100 L 300 100 L 200 300 z');
+    elPath.setAttributeNS(namespace, 'transform', 'scale(.2)');
 
     fabric.Path.fromElement(elPath, function(path) {
       assert.ok(path instanceof fabric.Path);
-
-      assert.deepEqual(path.toObject().transformMatrix, [0.2, 0, 0, 0.2, 0, 0]);
-
+      assert.deepEqual(path.transformMatrix, [0.2, 0, 0, 0.2, 0, 0], 'transform has been parsed');
       done();
     });
   });

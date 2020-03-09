@@ -1,5 +1,80 @@
 # Changelog
 
+## [4.0.0-beta.7]
+
+feat(controls): Added controls mouseUpHandler and mouseDownHandler [#6158](https://github.com/fabricjs/fabric.js/pull/6158)
+Removal of deprecated methods / patterns. [#6111](https://github.com/fabricjs/fabric.js/pull/6111)
+- removed Object.setShadow, and BaseBrush.setShadow. change `rect.setShadow(options)` to `rect.set('shadow', new fabric.Shadow(options))`
+- removed Object.transformMatrix.
+- removed `object:selected` event. use `selection:created`. In the callback you will still find  `target` in the options, but also you will find `selected` with all the objects selected during that single event.
+- removed Gradient.forObject. No alternative available.
+- removed Object and canvas `clipTo`. Use Object.clipPath;
+- removed Canvas.loadFromDatalessJSON, it was just an alias for `loadFromJSON`
+- removed `observe`, `stopObserving`, `trigger` from observable. Keep using `on`, `off`, `fire`.
+- removed the Object.set ability to take a function as a value. Was rather strange to use.
+- removed Object.setGradient. Change `rect.setGradient(options)` with `rect.set('fill', new fabric.Gradient(otherOptions))`. The options format is slightly different, but keeping 2 formats does not really make sense.
+- removed Object.setPatternFill. Change `rect.setPatternFill(options)` to `rect.set('fill', new fabric.Pattern(options))`;
+- removed Object.setColor. Change `rect.setColor(color)` to `rect.set('fill', color)`
+- removed fabric.util.customTransformMatrix. Use the replacement fabric.util.composeMatrix
+
+## [4.0.0-beta.6]
+
+fix(fabric.IText): exitEditing won't error on missing hiddenTextarea. [#6138](https://github.com/fabricjs/fabric.js/pull/6138)
+
+## [4.0.0-beta.5]
+
+fix(fabric.Object): getObjectScaling takes in account rotation of objects inside groups. [#6118](https://github.com/fabricjs/fabric.js/pull/6118)
+
+## [4.0.0-beta.4]
+
+fix(fabric.Group): will draw shadow will call parent method. [#6116](https://github.com/fabricjs/fabric.js/pull/6116)
+
+## [4.0.0-beta.3]
+
+fix(controls): control offset rendering code had extras `beginPath` that would clear all but not the last of them [#6114](https://github.com/fabricjs/fabric.js/pull/6114)
+
+## [4.0.0-beta.2]
+
+fix(controls): Control.getVisibility will always receive the fabric.Object argument.
+
+## [4.0.0-beta.1]
+
+breaking: All your old control code override will not work
+breaking: `uniScaleTransform` has been renamed in `uniformScaling`, meaning changed and  the default  value swapped. The behaviour is unchanged, but now the description and the name match.
+breaking: LockScalingFlip with the scaling flip behaviour are missing now, maybe reimplemented later.
+breaking: Object.lockUniScaling is removed. Alternatives to get the same identical functionality with less code are being evaluated.
+breaking: Canvas.onBeforeScaleRotate is removed, developers need to migrate to the event `before:transform’
+
+## [3.6.2]
+- fix fabric.Object.toDataURL blurriness on images with odd pixel number [#6131](https://github.com/fabricjs/fabric.js/pull/6131)
+
+## [3.6.1]
+- fix(gradient, text): ISSUE-6014 ISSUE-6077 support percentage gradient in text [#6090](https://github.com/fabricjs/fabric.js/pull/6090)
+- fix(filters): ISSUE-6072 convolution filter is off by one [#6088](https://github.com/fabricjs/fabric.js/pull/6088)
+- fix(transform): Fix a bug in the skewing logic [#6082](https://github.com/fabricjs/fabric.js/pull/6088)
+
+## [3.6.0]
+- fix: ISSUE-5512 better Clippath transform parsing in SVG [#5983](https://github.com/fabricjs/fabric.js/pull/5983)
+- fix: ISSUE-5984 Avoid enter editing in non selectable object [#5989](https://github.com/fabricjs/fabric.js/pull/5989)
+- Tweak to object._setLineDash to avoid cycles when nothing in array [#6000](https://github.com/fabricjs/fabric.js/pull/6000)
+- fix: ISSUE-5867 Fix the extra new line selection with empty line [#6011](https://github.com/fabricjs/fabric.js/pull/6011)
+- Improvement: Use SVG Namespace for SVG Elements [#5957](https://github.com/fabricjs/fabric.js/pull/5957)
+- Improvement: ISSUE-4115 - triggers in/out events for sub targets [#6013](https://github.com/fabricjs/fabric.js/pull/6013)
+- Improvement: Upper canvas retina scaling [#5938](https://github.com/fabricjs/fabric.js/pull/5938)
+
+## [3.5.1]
+- Fix for textbox non defined in scaleObject [#5896](https://github.com/fabricjs/fabric.js/pull/5896)
+- Fix canvas pattern as background and exports [#5973](https://github.com/fabricjs/fabric.js/pull/5973)
+- Fix for type error if style is null when checking if is empty [#5971](https://github.com/fabricjs/fabric.js/pull/5971)
+- Fix for load from datalessJSON for svg groups with sourcePath [#5970](https://github.com/fabricjs/fabric.js/pull/5970)
+
+## [3.5.0]
+- Deprecation: deprecated 3 method of the api that will disappear in fabric 4: setPatternFill, setColor, setShadow.
+- Fix: remove line dash modification for strokeUniform [#5953](https://github.com/fabricjs/fabric.js/pull/5953)
+- Improvement: ISSUE-5955 parse svg clip-path recursively [#5960](https://github.com/fabricjs/fabric.js/pull/5960)
+- Fix: object.toCanvasElement of objects in groups [#5962](https://github.com/fabricjs/fabric.js/pull/5962)
+- change pencil brush finalize to be in line with other brushes [#5866](https://github.com/fabricjs/fabric.js/pull/5866)
+
 ## [3.4.0]
 - Support fill-opacity on gradient parsing from SVG. [#5812](https://github.com/fabricjs/fabric.js/pull/5812)
 - Rewrite gradient parsing from SVG to work with more transformation and combinations of attributes. [#5836](https://github.com/fabricjs/fabric.js/pull/5836)
