@@ -15,7 +15,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
           scope: '@arch-inc'
-      - run: npm ci --skip-optional
+      - run: npm install --skip-optional
       - run: npm run build_with_gestures
       - run: npm publish --access public
         env:
