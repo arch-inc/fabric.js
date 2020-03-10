@@ -1,7 +1,7 @@
 ### Fabric (in-house build with gesture support etc.)
 
 [![Node.js Package](https://github.com/arch-inc/fabric.js/workflows/Node.js%20Package/badge.svg)](https://github.com/arch-inc/fabric.js/actions?query=workflow%3A%22Node.js+Package%22)
-[![npm version](https://img.shields.io/npm/v/@arch-inc/fabric)](https://www.npmjs.com/package/@arch-inc/fabric.js)
+[![npm version](https://img.shields.io/npm/v/@arch-inc/fabric)](https://www.npmjs.com/package/@arch-inc/fabric)
 
 __This repository is basically a mirror of the original repo except for the GitHub Action script that publishes a scoped npm package with gesture support etc.__
 
