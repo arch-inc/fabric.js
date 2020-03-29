@@ -2,7 +2,7 @@
   "name": "@arch-inc/fabric",
   "description": "Object model for HTML5 canvas, and SVG-to-canvas parser. Backed by jsdom and node-canvas.",
   "homepage": "http://fabricjs.com/",
-  "version": "4.0.0-beta.7",
+  "version": "4.0.0-beta.7a",
   "author": "Juriy Zaytsev <kangax@gmail.com>",
   "contributors": [
     {
